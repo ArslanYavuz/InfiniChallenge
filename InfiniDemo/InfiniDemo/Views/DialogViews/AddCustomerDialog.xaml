@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Class="InfiniDemo.Views.DialogViews.AddCustomerDialog"
+       xmlns:prism="http://prismlibrary.com"
+       prism:ViewModelLocator.AutowireViewModel="True"
+       prism:DialogLayout.RelativeWidthRequest="{OnIdiom Default=0.75, Desktop=0.5}"
+       HasShadow="false"
+       BackgroundColor="White">
+
+    <StackLayout>
+
+        <Entry Grid.Row="1"
+               Margin="0,4"
+               BackgroundColor="WhiteSmoke"
+               FontSize="Small"
+               Placeholder="Ad"
+               Text="{Binding Firstname, Mode=TwoWay}"
+               TextColor="DarkBlue" />
+
+        <Entry Margin="0,4"
+               BackgroundColor="WhiteSmoke"
+               FontSize="Small"
+               Placeholder="Soyad"
+               Text="{Binding Lastname, Mode=TwoWay}"
+               TextColor="DarkBlue" />
+
+        <Entry Margin="0,4"
+               BackgroundColor="WhiteSmoke"
+               FontSize="Small"
+               Placeholder="Uzmanlık"
+               Text="{Binding ProfessionCode, Mode=TwoWay}"
+               TextColor="DarkBlue" />
+
+        <Entry Margin="0,4"
+               BackgroundColor="WhiteSmoke"
+               FontSize="Small"
+               Placeholder="Kurum"
+               Text="{Binding LocationName, Mode=TwoWay}"
+               TextColor="DarkBlue" />
+
+        <StackLayout Orientation="Horizontal">
+
+            <Button Text="Kaydet"
+                Command="{Binding SaveCustomerCommand}"
+                TextColor="White"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="DarkBlue"/>
+            <Button Text="Kapat"
+                Command="{Binding CloseCommand}"
+                TextColor="White"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="DarkRed"/>
+
+        </StackLayout>
+        
+   
+    </StackLayout>
+
+
+</Frame>

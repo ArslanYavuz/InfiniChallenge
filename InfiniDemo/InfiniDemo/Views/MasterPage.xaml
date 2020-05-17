@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InfiniDemo.Views.MasterPage"
+               MasterBehavior="Popover" 
+             >
+    <MasterDetailPage.Master>
+        
+        <ContentPage Title="Menu">
+            
+            <StackLayout BackgroundColor="WhiteSmoke" Padding="20">
+
+                <Grid HorizontalOptions="FillAndExpand">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Image HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <OnPlatform.iOS>
+                                    <FileImageSource File="account.png"/>
+                                </OnPlatform.iOS>
+                                <OnPlatform.Android>
+                                    <FileImageSource File="account.png"/>
+                                </OnPlatform.Android>
+                                <OnPlatform.WinPhone>
+                                    <FileImageSource File="Assets/account.png"/>
+                                </OnPlatform.WinPhone>
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+
+                    <StackLayout HorizontalOptions="FillAndExpand"
+                                 Grid.Column="1"
+                                 VerticalOptions="CenterAndExpand">
+
+                        <Label Text="{Binding FullName}"
+                           TextColor="DarkBlue"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           HorizontalOptions="FillAndExpand"></Label>
+                        <Label Text="{Binding Email}"
+                           TextColor="Black"
+                           FontSize="Small"
+                           HorizontalOptions="FillAndExpand"></Label>
+                        <Label Text="{Binding PositionDesc}"
+                           TextColor="Black"
+                           FontSize="Small"
+                           HorizontalOptions="FillAndExpand"></Label>
+
+
+                    </StackLayout>
+
+                </Grid>
+                
+              
+                
+                
+                <!-- Buraya ListView da gelebilir .. Item sayısı az olmasından ötürü kullanılmadı.. -->
+                <!--<Button Text="Ana Sayfa"
+                        TextColor="White"
+                        FontSize="Medium"
+                        BackgroundColor="DarkBlue"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="NavigationPage/MainPage"></Button>-->
+
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="FillAndExpand">
+                    <Image HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <OnPlatform.iOS>
+                                    <FileImageSource File="customer.png"/>
+                                </OnPlatform.iOS>
+                                <OnPlatform.Android>
+                                    <FileImageSource File="customer.png"/>
+                                </OnPlatform.Android>
+                                <OnPlatform.WinPhone>
+                                    <FileImageSource File="Assets/customer.png"/>
+                                </OnPlatform.WinPhone>
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+                    
+                    <Label Text="Kişiler"
+                           TextColor="DarkBlue"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           HorizontalOptions="FillAndExpand"></Label>
+
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="NavigationPage/CustomerListPage"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+
+                    
+
+                </StackLayout>
+                
+                <!--<Button Text="Kişiler"
+                        TextColor="White"
+                        FontSize="Medium"
+                        BackgroundColor="DarkBlue"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="NavigationPage/CustomerListPage"></Button>-->
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+</MasterDetailPage>

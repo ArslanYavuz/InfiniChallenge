@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InfiniDemo.Views.LoginPage"
+             NavigationPage.HasNavigationBar="False">
+    <Grid VerticalOptions="FillAndExpand"
+          HorizontalOptions="FillAndExpand"
+          BackgroundColor="LightGray">
+
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackLayout HorizontalOptions="FillAndExpand"
+               VerticalOptions="CenterAndExpand"
+                     Orientation="Vertical"
+               Grid.Column="1">
+
+            <Image HorizontalOptions="FillAndExpand">
+                <Image.Source>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <OnPlatform.iOS>
+                            <FileImageSource File="idesse.png"/>
+                        </OnPlatform.iOS>
+                        <OnPlatform.Android>
+                            <FileImageSource File="idesse.png"/>
+                        </OnPlatform.Android>
+                        <OnPlatform.WinPhone>
+                            <FileImageSource File="Assets/idesse.png"/>
+                        </OnPlatform.WinPhone>
+                    </OnPlatform>
+                </Image.Source>
+            </Image>
+
+            <Frame 
+                
+                HorizontalOptions="FillAndExpand"
+               VerticalOptions="CenterAndExpand"
+               BackgroundColor="White" 
+               CornerRadius="12">
+
+                <Grid HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  RowSpacing="15">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0"
+                       FontSize="Title"
+                       FontAttributes="Bold"
+                       Text="Giriş Yap"
+                       HorizontalOptions="Start"
+                       TextColor="DarkBlue"
+                       VerticalOptions="Center"></Label>
+
+                    <Grid Grid.Row="1" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Entry
+                        Grid.Row="1"
+                        Margin="0,4"
+                        BackgroundColor="WhiteSmoke"
+                        FontSize="Small"
+                        Placeholder="Kullanıcı Adı"
+                        Text="{Binding Username, Mode=TwoWay}"
+                        TextColor="DarkBlue" />
+                        <Entry
+                        Grid.Row="2"
+                        BackgroundColor="WhiteSmoke"
+                        IsPassword="True"                       
+                        Placeholder="Şifre"
+                        FontSize="Small"
+                        Text="{Binding Password, Mode=TwoWay}"
+                        TextColor="DarkBlue" />
+                    </Grid>
+
+                    <Button
+                    Grid.Row="2"
+                    BackgroundColor="DarkBlue"  
+                    IsEnabled="{Binding IsBusy,Converter={StaticResource BooleanToReverseConverter}}"
+                    Command="{Binding LoginCommand}"
+                    CornerRadius="20"
+                    FontSize="Small"
+                    HeightRequest="{Binding ComponentSize.MLayoutSize}"
+                    HorizontalOptions="FillAndExpand"                    
+                    Text="Giriş"
+                    TextColor="White"
+                    VerticalOptions="End" />
+
+                    <ActivityIndicator
+                        Grid.Row="3"
+                    IsVisible="{Binding IsBusy}"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="Center"
+                    IsRunning="{Binding IsBusy}"
+                    Color="DarkBlue" />
+
+                </Grid>
+
+            </Frame>
+
+        </StackLayout>
+
+
+
+
+    </Grid>
+</ContentPage>

@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InfiniDemo.Views.CustomerListPage"
+             xmlns:behavior ="clr-namespace:InfiniDemo.Behaviours" 
+             Title="{Binding Title}"
+             >
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Command="{Binding AddCustomerCommand}" Order="Primary" Priority="0">
+            <ToolbarItem.IconImageSource>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <OnPlatform.iOS>
+                            <FileImageSource File="plus_icon.png"/>
+                        </OnPlatform.iOS>
+                        <OnPlatform.Android>
+                        <FileImageSource File="plus_icon.png"/>
+                        </OnPlatform.Android>
+                        <OnPlatform.WinPhone>
+                        <FileImageSource File="Assets/plus_icon.png"/>
+                        </OnPlatform.WinPhone>
+                    </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <Grid HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand"
+          >
+
+        <Grid HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand"
+              RowSpacing="10"
+              IsVisible="{Binding IsBusy , Converter={StaticResource Key=BooleanToReverseConverter}}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="CenterAndExpand">
+
+                <ImageButton 
+                    BackgroundColor="Transparent"      
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    Command="{Binding FirstPageCommand}">
+                    <ImageButton.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <OnPlatform.iOS>
+                                <FileImageSource File="firstpagearrow.png"/>
+                            </OnPlatform.iOS>
+                            <OnPlatform.Android>
+                                <FileImageSource File="firstpagearrow.png"/>
+                            </OnPlatform.Android>
+                            <OnPlatform.WinPhone>
+                                <FileImageSource File="Assets/firstpagearrow.png"/>
+                            </OnPlatform.WinPhone>
+                        </OnPlatform>
+                    </ImageButton.Source>
+
+
+                </ImageButton>
+
+                <ImageButton 
+                    BackgroundColor="Transparent"      
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    Command="{Binding PreviousPageCommand}">
+                    <ImageButton.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <OnPlatform.iOS>
+                                <FileImageSource File="previouspagearrow.png"/>
+                            </OnPlatform.iOS>
+                            <OnPlatform.Android>
+                                <FileImageSource File="previouspagearrow.png"/>
+                            </OnPlatform.Android>
+                            <OnPlatform.WinPhone>
+                                <FileImageSource File="Assets/previouspagearrow.png"/>
+                            </OnPlatform.WinPhone>
+                        </OnPlatform>
+                    </ImageButton.Source>
+                    
+                    
+                </ImageButton>
+
+                <StackLayout Orientation="Vertical"
+                             Spacing="5">
+
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center">
+                        <Label Text="Listelenen Toplam Kayıt : "
+                           TextColor="DarkBlue"></Label>
+                        <Label Text="{Binding CurrentCount}"
+                           TextColor="DarkBlue"></Label>
+                    </StackLayout>
+                  
+                    
+                    <Label TextColor="DarkBlue"
+                           HorizontalOptions="CenterAndExpand">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding CurrentPageIndex}" FontAttributes="Bold" FontSize="Small"/>
+                                <Span Text="/" FontSize="Small" />
+                                <Span Text="{Binding TotalPageCount}" FontSize="Small" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                </StackLayout>             
+
+                <ImageButton
+                    BackgroundColor="Transparent"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    Command="{Binding NextPageCommand}">
+
+                    <ImageButton.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <OnPlatform.iOS>
+                                <FileImageSource File="nextpagearrow.png"/>
+                            </OnPlatform.iOS>
+                            <OnPlatform.Android>
+                                <FileImageSource File="nextpagearrow.png"/>
+                            </OnPlatform.Android>
+                            <OnPlatform.WinPhone>
+                                <FileImageSource File="Assets/nextpagearrow.png"/>
+                            </OnPlatform.WinPhone>
+                        </OnPlatform>
+                    </ImageButton.Source>
+
+                </ImageButton>
+
+                <ImageButton
+                    BackgroundColor="Transparent"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    Command="{Binding LastPageCommand}">
+
+                    <ImageButton.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <OnPlatform.iOS>
+                                <FileImageSource File="lastpagearrow.png"/>
+                            </OnPlatform.iOS>
+                            <OnPlatform.Android>
+                                <FileImageSource File="lastpagearrow.png"/>
+                            </OnPlatform.Android>
+                            <OnPlatform.WinPhone>
+                                <FileImageSource File="Assets/lastpagearrow.png"/>
+                            </OnPlatform.WinPhone>
+                        </OnPlatform>
+                    </ImageButton.Source>
+
+                </ImageButton>
+
+            </StackLayout>
+
+            <SearchBar  x:Name="SearchBar" 
+                        Grid.Row="1"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Placeholder="Arama için en az 4 karakter girin(isme göre).. "
+                        FontSize="Small"
+                        PlaceholderColor="Gray"
+                        SearchCommand="{Binding PerformSearchCommand}"
+                        SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                        Text="{Binding SearchText,Mode=TwoWay}">
+                <SearchBar.Behaviors>
+                    <behavior:SearchTextChangedBehaviour />
+                </SearchBar.Behaviors>
+            </SearchBar>
+
+            <Grid HeightRequest="2"
+                  HorizontalOptions="FillAndExpand"
+                  Grid.Row="2"
+                  BackgroundColor="DarkGray"></Grid>
+
+            <ListView ItemsSource="{Binding CustomerCollection}" Grid.Row="3">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout HorizontalOptions="FillAndExpand">
+
+                                    <StackLayout HorizontalOptions="FillAndExpand"
+                                             Orientation="Horizontal">
+
+                                        <Image Source="{Binding IconString}"
+                                               HorizontalOptions="Center"
+                                               Margin="10"
+                                               HeightRequest="80"
+                                               WidthRequest="80"
+                                               VerticalOptions="Center"></Image>
+                                        
+                                        <Grid HorizontalOptions="FillAndExpand"
+                                              VerticalOptions="CenterAndExpand"
+                                              RowSpacing="5">
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                            </Grid.RowDefinitions>
+
+                                            <StackLayout Orientation="Horizontal" Spacing="5" Grid.Row="0">
+                                                <Label Text="{Binding CardTitleCode}"
+                                           FontAttributes="Bold"
+                                           FontSize="Small"
+                                           TextColor="Black"></Label>
+                                                <Label Text="{Binding CardName}"
+                                           FontAttributes="Bold"
+                                           FontSize="Small"
+                                           TextColor="Black"></Label>
+                                                <Label TextColor="DarkBlue">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="(" FontAttributes="Bold" FontSize="Small"/>
+                                                            <Span Text="{Binding CardProfessionCode}" FontSize="Small" />
+                                                            <Span Text=")" FontSize="Small" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+
+                                            <Label Text="{Binding LocationName}"
+                                           FontSize="Micro"
+                                       Grid.Row="1"
+                                           TextColor="DarkGray"></Label>
+
+                                            <StackLayout Orientation="Horizontal"
+                                                         VerticalOptions="Center" Spacing="2" Grid.Row="2">
+
+
+                                                <Label TextColor="DarkGray">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Bu Ay : " FontAttributes="Bold" FontSize="Micro"/>
+                                                            <Span Text="{Binding ThisMonthRealizedPlanCount}" FontSize="Micro" />
+                                                            <Span Text="/" FontSize="Small" />
+                                                            <Span Text="{Binding ThisMonthPlanCount}" FontSize="Micro" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+                                                <Label Text="|"
+                                           FontSize="Micro"
+                                           TextColor="DarkGray"></Label>
+
+                                                <Label TextColor="DarkGray">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Bu Ay : " FontAttributes="Bold" FontSize="Micro"/>
+                                                            <Span Text="{Binding YtdRealizedPlanCount}" FontSize="Micro" />
+                                                            <Span Text="/" FontSize="Micro" />
+                                                            <Span Text="{Binding YtdPlanCount}" FontSize="Micro" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+                                                <Label Text="|"
+                                           FontSize="Micro"
+                                           TextColor="DarkGray"></Label>
+
+                                                <Label TextColor="DarkGray">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Ay Ort. : " FontAttributes="Bold" FontSize="Micro"/>
+                                                            <Span Text="{Binding RealizedCountAvg}" FontSize="Micro" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+                                                <Label Text="|"
+                                           FontSize="Micro"
+                                           TextColor="DarkGray"></Label>
+
+                                                <Label TextColor="DarkGray">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Frekans : " FontAttributes="Bold" FontSize="Micro"/>
+                                                            <Span Text="{Binding PropertyFrequency}" FontSize="Micro" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+                                            </StackLayout>
+
+                                        </Grid>
+
+
+
+
+
+                                    </StackLayout>
+
+                                    <Grid HeightRequest="2"
+                                          HorizontalOptions="FillAndExpand"
+                                          BackgroundColor="DarkGray"></Grid>
+
+                                </StackLayout>
+                          
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+
+        <ActivityIndicator
+                    IsVisible="{Binding IsBusy}"
+                    HeightRequest="120"
+                    HorizontalOptions="Center"
+                    IsRunning="{Binding IsBusy}"
+                    VerticalOptions="Center"
+                    WidthRequest="120"
+                    Color="Black" />
+
+    </Grid>
+    
+    
+
+
+</ContentPage>
