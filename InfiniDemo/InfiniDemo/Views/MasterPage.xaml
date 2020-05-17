@@ -60,13 +60,7 @@
               
                 
                 
-                <!-- Buraya ListView da gelebilir .. Item sayısı az olmasından ötürü kullanılmadı.. -->
-                <!--<Button Text="Ana Sayfa"
-                        TextColor="White"
-                        FontSize="Medium"
-                        BackgroundColor="DarkBlue"
-                        Command="{Binding NavigateCommand}"
-                        CommandParameter="NavigationPage/MainPage"></Button>-->
+                <!-- Buraya ListView da gelebilir .. Item sayısı az olmasından ötürü kullanılmadı.. -->            
 
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="FillAndExpand">
@@ -103,12 +97,14 @@
 
                 </StackLayout>
                 
-                <!--<Button Text="Kişiler"
+                <Button Text="Çıkış Yap"
                         TextColor="White"
+                        VerticalOptions="End"
                         FontSize="Medium"
-                        BackgroundColor="DarkBlue"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="DarkRed"
                         Command="{Binding NavigateCommand}"
-                        CommandParameter="NavigationPage/CustomerListPage"></Button>-->
+                        CommandParameter="NavigationPage/LoginPage"></Button>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>

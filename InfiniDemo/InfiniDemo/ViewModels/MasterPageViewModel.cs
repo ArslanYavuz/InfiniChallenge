@@ -5,6 +5,7 @@ using InfiniDemo.Interfaces;
 using InfiniDemo.Models;
 using Prism.Commands;
 using Prism.Navigation;
+using Xamarin.Forms;
 
 namespace InfiniDemo.ViewModels
 {
@@ -46,11 +47,11 @@ namespace InfiniDemo.ViewModels
 
         #region Commands
 
-        public DelegateCommand<string> NavigateCommand { get; set; } 
+        public DelegateCommand<string> NavigateCommand { get; set; }
 
         #endregion
 
-        public MasterPageViewModel(INavigationService navigationService,ILoginService loginService, ICustomDialogService dialogService) : base(navigationService)
+        public MasterPageViewModel(INavigationService navigationService, ILoginService loginService, ICustomDialogService dialogService) : base(navigationService)
         {
             _navigationService = navigationService;
             _loginService = loginService;
@@ -77,7 +78,18 @@ namespace InfiniDemo.ViewModels
 
         private async void Navigate(string page)
         {
-            await _navigationService.NavigateAsync(new Uri(page,UriKind.Relative));
+            if (page.Contains("Login"))
+            {
+                var confResult = await _dialogService.ShowConfirmationDialogAsync("Çıkış Yapmak Istediğinize Emin Misiniz ? ");
+
+                if(confResult == ConfirmationDialogResult.Accepted)
+                {
+                    Application.Current.Properties.Clear();
+                    await _navigationService.NavigateAsync(new Uri(page, UriKind.Relative));
+                }
+            }
+            else
+                await _navigationService.NavigateAsync(new Uri(page, UriKind.Relative));
         }
     }
 }

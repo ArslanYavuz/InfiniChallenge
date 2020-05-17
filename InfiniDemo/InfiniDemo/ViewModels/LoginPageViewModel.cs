@@ -97,7 +97,7 @@ namespace InfiniDemo.ViewModels
                 {
                     GlobalAppContext.UserInfo = await _loginService.GetUserMobileAsync();
                     IsBusy = false;
-                    await NavigationService.NavigateAsync(new Uri("http://www.brianlagunas.com/MasterPage/NavigationPage/CustomerListPage", UriKind.Absolute)); // Absolute URI Documentation
+                    await NavigationService.NavigateAsync(new Uri("http://www.brianlagunas.com/MasterPage/NavigationPage/CustomerListPage", UriKind.Absolute)); // Using Absolute URI Documentation
                 }
                 else
                 {
