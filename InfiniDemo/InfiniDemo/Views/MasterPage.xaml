@@ -4,7 +4,9 @@
              x:Class="InfiniDemo.Views.MasterPage"
                MasterBehavior="Popover" 
              >
-    <MasterDetailPage.Master>
+    <!-- Proje Testinin UWP Desktop üzerinden yapılması sebebiyeti ile MasterBehaviour = "Popover" olarak set edildi.-->
+
+        <MasterDetailPage.Master>
         
         <ContentPage Title="Menu">
             
